@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>祝老妈生日快乐！</title>
+    <style>
+        /* 基础设置：柔和渐变背景，防止手机端出现横向滚动条 */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fce3ec 0%, #f8b8c8 100%);
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* 信封/卡片样式 */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(216, 30, 6, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            z-index: 10;
+            animation: popIn 1.2s ease-out;
+        }
+
+        /* 标题文字效果 */
+        h1 {
+            color: #d81e06;
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(216, 30, 6, 0.2);
+        }
+
+        /* 寄语文本，行距拉大一点更好看 */
+        p {
+            color: #444;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* 惊喜按钮 */
+        .btn {
+            background: #d81e06;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 30, 6, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #b91a05;
+        }
+
+        /* 卡片弹出动画 */
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 飘落爱心的样式 */
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            color: #ff4d4d;
+            font-size: 20px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0;
+        }
+
+        /* 爱心从下往上飘的动画 */
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 卡片主体内容 -->
+    <div class="card">
+        <h1>亲爱的老妈,40岁生日快乐!🎂</h1>
+        <p>
+            以前是你看着我慢慢长大，<br>
+            以后是我陪着你永远年轻。<br>
+            <br>
+            这个网页是我亲手为你敲出来的代码，<br>
+            就像你对我的爱一样，独一无二。<br>
+            <br>
+            愿你未来的每一天，<br>
+            眼里有光，心中有爱，永远健康快乐！
+            希望你和老爸天天开心,永远健康,永远幸福！
+        </p >
+        <button class="btn" onclick="createHeartBurst()">点我收下惊喜 ❤️</button>
+    </div>
+
+    <script>
+        // 每次生成一个爱心
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            // 随机使用爱心或星星符号
+            heart.innerHTML = Math.random() > 0.5 ? '❤️' : '✨'; 
+            // 随机出现在屏幕的横向位置
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            // 随机大小（10px 到 30px）
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            // 随机飘动速度
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's'; 
+
+            document.body.appendChild(heart);
+
+            // 飘出屏幕后自动删除，防止网页卡顿
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // 网页一打开，每隔 300 毫秒自动飘一个爱心
+        setInterval(createHeart, 300);
+
+        // 点击按钮时的“爆裂”特效：瞬间喷发 30 个爱心
+        function createHeartBurst() {
+            for(let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
